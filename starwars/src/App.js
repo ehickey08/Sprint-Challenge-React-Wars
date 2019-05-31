@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import './App.css';
-
+import './App.scss';
+import StarWarsCharacters from './components/StarWarsCharacters'
 class App extends Component {
   constructor() {
     super();
@@ -29,10 +29,22 @@ class App extends Component {
       });
   };
 
+  displayItems = (key) => {
+    const newArray = this.state.starwarsChars.filter(char => char.created === key);
+    newArray[0].clicked = !newArray[0].clicked;
+    this.setState(prevState => ({
+        starwarsChars: [...prevState.starwarsChars]
+    }))
+  }
+
   render() {
     return (
-      <div className="App">
+      <div className="App-container">
         <h1 className="Header">React Wars</h1>
+        <StarWarsCharacters 
+            listOfChar = {this.state.starwarsChars}
+            displayItems = {this.displayItems}
+        />
       </div>
     );
   }
