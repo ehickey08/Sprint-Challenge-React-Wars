@@ -6,12 +6,14 @@ class App extends Component {
     super();
     this.state = {
       starwarsChars: [],
-      pageNumber: 1
+      next: `https://swapi.co/api/people/`,
+      search: ''
     };
   }
 
-  componentDidMount() {
-    this.getCharacters(`https://swapi.co/api/people/?page=${this.state.pageNumber}`);
+  componentDidMount(url) {
+      if(!url) url=this.state.next
+    this.getCharacters(url);
   }
 
   getCharacters = URL => {
@@ -23,6 +25,8 @@ class App extends Component {
         return res.json();
       })
       .then(data => {
+        this.setState({next: data.next})
+        this.setState({prev: data.previous})
         this.setState({starwarsChars: data.results });
       })
       .catch(err => {
@@ -39,17 +43,22 @@ class App extends Component {
   }
 
   nextPage = () => {
-    this.setState(prevState => ({
-        pageNumber: prevState.pageNumber+1
-    }), () => this.componentDidMount())
+      if(this.state.next===null) return
+    this.componentDidMount(this.state.next)
   }
 
   previousPage = () => {
-    this.setState(prevState => ({
-        pageNumber: prevState.pageNumber-1
-    }), () => this.componentDidMount())
+      if(this.state.prev ===null) return
+      this.componentDidMount(this.state.prev)
   }
 
+  search = (event) => {
+    this.setState({
+        search: event.target.value
+    }, () => this.componentDidMount(`https://swapi.co/api/people/?search=${this.state.search}`))
+
+    
+  }
   render() {
     return (
       <div className="App-container">
@@ -58,6 +67,12 @@ class App extends Component {
             <button onClick = {this.previousPage}>Previous Page</button>
             <button onClick = {this.nextPage}>Next Page</button>
         </div>
+        <input 
+            onChange = {this.search} 
+            className = 'search' 
+            placeholder = 'Search for characters...' 
+            value = {this.state.search}>    
+        </input>
         <StarWarsCharacters 
             listOfChar = {this.state.starwarsChars}
             displayItems = {this.displayItems}
