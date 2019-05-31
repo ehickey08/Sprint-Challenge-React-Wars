@@ -5,12 +5,13 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      starwarsChars: []
+      starwarsChars: [],
+      pageNumber: 1
     };
   }
 
   componentDidMount() {
-    this.getCharacters('https://swapi.co/api/people/');
+    this.getCharacters(`https://swapi.co/api/people/?page=${this.state.pageNumber}`);
   }
 
   getCharacters = URL => {
@@ -22,7 +23,7 @@ class App extends Component {
         return res.json();
       })
       .then(data => {
-        this.setState({ starwarsChars: data.results });
+        this.setState({starwarsChars: data.results });
       })
       .catch(err => {
         throw new Error(err);
@@ -37,10 +38,26 @@ class App extends Component {
     }))
   }
 
+  nextPage = () => {
+    this.setState(prevState => ({
+        pageNumber: prevState.pageNumber+1
+    }), () => this.componentDidMount())
+  }
+
+  previousPage = () => {
+    this.setState(prevState => ({
+        pageNumber: prevState.pageNumber-1
+    }), () => this.componentDidMount())
+  }
+
   render() {
     return (
       <div className="App-container">
         <h1 className="Header">React Wars</h1>
+        <div className = 'buttons'>
+            <button onClick = {this.previousPage}>Previous Page</button>
+            <button onClick = {this.nextPage}>Next Page</button>
+        </div>
         <StarWarsCharacters 
             listOfChar = {this.state.starwarsChars}
             displayItems = {this.displayItems}
