@@ -1,21 +1,19 @@
 import React, {useState, useEffect} from 'react';
 import People from './components/People'
-import {Spin, Button, Icon} from 'antd'
+import {Spin, Button, Icon, Input} from 'antd'
 import axios from 'axios'
 import './App.css';
 
-const App = () => {
-  // Try to think through what state you'll need for this app before starting. Then build out
-  // the state properties here.
+const {Search} = Input
 
-  // Fetch characters from the star wars api in an effect hook. Remember, anytime you have a 
-  // side effect in a component, you want to think about which state and/or props it should
-  // sync up with, if any.
+const App = () => {
+  
 const [nextPage, setNextPage] = useState('');
 const [prevPage, setPrevPage] = useState('');
 const [people, setPeople] = useState([]);
 const [isLoading, setIsLoading] = useState(true);
 const [films, setFilms] = useState([]);
+const [search, setSearch] = useState();
 
 function fetchPeople(url){
     axios
@@ -60,11 +58,22 @@ useEffect(() => {
     fetchPeople(`https://swapi.co/api/people`)
 }, []);
 
+useEffect(() => {
+    setPeople([])
+    setIsLoading(true)
+    fetchPeople(`https://swapi.co/api/people/?search=${search}`)
+}, [search]);
+
   return (
     <div className="App">
         <h1 className="Header">React Wars</h1>
-        {isLoading && <Spin size='large' />}
-        <People people={people} films={films}/>
+        <Search
+            placeholder="Find your favorite character"
+            onChange={e => setSearch(e.target.value)}
+            style={{ width: 300 }}
+        /><br></br>
+        {isLoading && <Spin size='large' style={{margin: '15px'}}/>}
+        <br></br>
         <Button.Group size='small'>
             <Button type="primary" onClick={() => newPage(prevPage)}>
                 <Icon type="left" />
@@ -75,6 +84,7 @@ useEffect(() => {
                 <Icon type="right" />
             </Button>
         </Button.Group>
+        <People people={people} films={films}/>
     </div>
   );
 }
