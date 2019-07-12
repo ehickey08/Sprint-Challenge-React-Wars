@@ -4,7 +4,7 @@ import Character from './Character';
 
 const StarWarsCharacters = props => {
     return( 
-        <div className = "allChars">
+        <>
             {props.listOfChar.map(char => {
             return(
                 <Character 
@@ -13,7 +13,7 @@ const StarWarsCharacters = props => {
                     displayItems = {props.displayItems}
                 />
             )})}
-        </div>
+        </>
     );
 }
 
