@@ -1,12 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
 function Film(props) {
-    
+    let unformattedDate = props.film.release_date;
+    let date = unformattedDate.replace(/(\d+)-(\d+)-(\d+)/, '$2-$3-$1')
     return (
         <ModalContainer>
             <h2>{props.film.title}</h2>
             <h4>Director: {props.film.director}</h4>
-            <h4>Release Date{props.film.release_date}</h4>
+            <h4>Release Date: {date}</h4>
         </ModalContainer>
     )
 }

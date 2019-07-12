@@ -18,7 +18,9 @@ function Films(props) {
                 visible={visible}
                 onOk={() => setVisible(false)}
                 onCancel={() => setVisible(false)}
+                style ={{textAlign: 'center'}}
             >
+                *In order of movie episode*
                 {filmsToDisplay.map(film => <Film film={film} key={film.release_date} />)}
             </Modal>
         </div>
