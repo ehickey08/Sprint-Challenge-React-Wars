@@ -15,6 +15,9 @@ function People(props) {
 
 export default People
 
+People.defaultProps ={
+    people: []
+}
 const PeopleContainer = styled.div`
     display: flex;
     flex-wrap: wrap;

@@ -145,3 +145,9 @@ exports[`<App /> should match snapshot 1`] = `
   />
 </div>
 `;
+
+exports[`<People /> should match snapshot 1`] = `
+<div
+  className="sc-htpNat bVynyk"
+/>
+`;

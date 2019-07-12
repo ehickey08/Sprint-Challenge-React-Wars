@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import App from './App';
-
+import People from './components/People'
 
 import renderer from 'react-test-renderer'
 
@@ -21,3 +21,9 @@ describe('<App />', () => {
     })
 })
 
+describe('<People />', () => {
+    it('should match snapshot', () => {
+        const tree = renderer.create(<People />).toJSON()
+        expect(tree).toMatchSnapshot()
+    })
+})
