@@ -26,11 +26,19 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] What is React JS and what problems does it try and solve? Support your answer with concepts introduced in class and from your personal research on the web.
 
+ReactJS is one of the most popular libraries, courtesy of Facebook, for building web applications. It solves many of the problems that arise with intense user interfaces, such as ever-changing data and multiple users interacting. It allows for reusable components to get and alter the data of the state and then React takes care of adjusting re-rendering the DOM when needed.
+
 - [ ] What does it mean to _think_ in react?
+
+ReactJS is one of the most popular libraries, courtesy of Facebook, for building web applications. It solves many of the problems that arise with intense user interfaces, such as ever-changing data and multiple users interacting. It allows for reusable components to get and alter the data of the state and then React takes care of adjusting re-rendering the DOM when needed.
 
 - [ ] Describe state.
 
+The state belongs to the component in which it is declared, and therefore can only be modified inside this component. The state is an object in your classical component that holds the variables and data that are essential to your application. 
+
 - [ ] Describe props.
+
+React has reusable components that need to access the state variables of the parent component. However, the state only belongs to the parent, so there needed to be a way for the data to go back and forth. This occurs through the props object. Props is passed to the component when it is created and it contains the attributes you passed to it during its creation. Props are read only, unlike the state. 
 
 ## Project Set Up
 

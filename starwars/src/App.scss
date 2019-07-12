@@ -1,0 +1,31 @@
+.App-container{
+  text-align: center;
+  width: 700px;
+  margin: 0 auto;
+  height: 100vh;
+  min-height: fit-content;
+}
+.Header {
+  color: #443e3e;
+  text-shadow: 1px 1px 5px #fff;
+}
+
+button{
+    margin: 0 10px;
+    font-size: 14px;
+    width: 130px;
+    height: 30px;
+    border-radius: 5px;
+    background: rgba(255,0,0,0.6);
+    color: white;
+    border: 1px solid white;
+
+    &:hover{
+        background: rgba(255,0,0,1)
+    }
+}
+
+input{
+    margin-top: 10px;
+}
+/* write your parent styles in here for your App.js */
